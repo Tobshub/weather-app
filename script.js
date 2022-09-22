@@ -1,48 +1,28 @@
-import {body,timeEl,sunIcon,moonIcon,dateEl,tempEl,humEl,windSEl,conditionEl,locationEl,loader} from './elems.js';
+import {body,timeEl,sunIcon,moonIcon,dateEl,tempEl,humEl,windSEl,conditionEl,locationInput,loader} from './elems.js';
+import { getWeatherData } from './api_calls.js';
 
-const API_KEY = '50ea7d652e899286b51fc70b0bc100a7';
 
-const getWeatherData = async (lat,lon) => {
-  try {
-    const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}`);
-    const Weather_Data = response.json();
-    return Weather_Data;
-  }
-  catch(e) {
-    console.log('fuck', e);
-  }
-}
-
-const getForecastData = async (lat,lon) => {
-  try {
-    const forecast = await fetch (`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${API_KEY}`)
-    const forecast_data  = await forecast;
-    return forecast_data;
-  }
-  catch(e) {
-    console.log(e);
-  }
-}
 
 
 function main() {
   if('geolocation' in navigator) {
     navigator.geolocation.getCurrentPosition((position)=>{
-      setTimeout(()=>{
-        loader.style.display = 'none';
-      }, 3000);
       let lat = parseFloat(position.coords.latitude.toFixed(2));
       let lon = parseFloat(position.coords.longitude.toFixed(2));
       getWeatherData(lat, lon)
+      .then((data)=> {
+        locationInput.value = data.city.name + ', ' + data.city.country;
+        return data.list
+      })
       .then((data)=>{
-        let date = new Date();
+        let date = new Date(data[0].dt_txt);
         timeEl.textContent = date.toLocaleTimeString([],{hour: '2-digit', minute: '2-digit', hour12: false});
         let interval =  setInterval(()=>{
-          updateDate(data);
+          updateDate(data[0]);
         }, 300)
         
-        if (date.getHours() > new Date(data.sys.sunrise).getHours() &&
-            date.getHours() < (new Date(data.sys.sunset).getHours()) + 12) {
+        if (date.getHours() > 6 &&
+            date.getHours() < 18) {
             sunIcon.style.display = '';
             body.style.background =  getComputedStyle(body).getPropertyValue('--day-bg');
             moonIcon.style.display = 'none';
@@ -58,23 +38,24 @@ function main() {
         return data;
       })
       .then((data)=>{
-        tempEl.textContent = parseInt(data.main.temp - 273);
-        humEl.textContent = data.main.humidity;
-        windSEl.textContent = data.wind.speed;
-        conditionEl.textContent = data.weather[0].description;
+        tempEl.textContent = parseInt(data[0].main.temp - 273);
+        humEl.textContent = data[0].main.humidity;
+        windSEl.textContent = data[0].wind.speed;
+        conditionEl.textContent = data[0].weather[0].description;
         return data;
       })
       .catch(e=>{
         console.log(e);
       })
       .finally(()=>{
+        setTimeout(()=>{
+          loader.style.opacity = '0%';
+        }, 100);
+        setTimeout(()=>{
+          loader.style.display = 'none';
+        }, 400);
         console.log("that's it for today's forecast");
       });
-
-      getForecastData(lat,lon)
-      .then(data=>{
-        console.log(data);
-      })
 
     })
   } else {

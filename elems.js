@@ -6,9 +6,9 @@ const tempEl = document.getElementById('temp');
 const humEl = document.getElementById('humidity');
 const windSEl = document.getElementById('wind-speed');
 const conditionEl = document.getElementById('conditions');
-const locationEl = document.getElementById('location');
+const locationInput = document.getElementById('location');
 const body = document.getElementsByTagName('body')[0];
 const loader = document.querySelector('.loader');
 
 
-export {body,timeEl,sunIcon,moonIcon,dateEl,tempEl,humEl,windSEl,conditionEl,locationEl,loader};
+export {body,timeEl,sunIcon,moonIcon,dateEl,tempEl,humEl,windSEl,conditionEl,locationInput,loader};

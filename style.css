@@ -43,6 +43,7 @@ body {
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
+  transition: 300ms ease;
 }
 
 
@@ -127,7 +128,8 @@ body {
   }
 
   .curr-details input {
-    width: 100px;
+    min-width: 100px;
+    max-width: fit-content;
     font-size: 18px;
     padding: .2em .5em;
   }
