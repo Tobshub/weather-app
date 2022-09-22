@@ -1,4 +1,4 @@
-import {body,timeEl,sunIcon,moonIcon,dateEl,tempEl,humEl,windSEl,conditionEl,locationInput,loader} from './elems.js';
+import {body,timeEl,sunIcon,moonIcon,dateEl,tempEl,humEl,windSEl,conditionEl,locationInput,loader,predicitonHum,predictionDays,predictionTemps,predictionWindS} from './elems.js';
 import { getWeatherData } from './api_calls.js';
 
 
@@ -9,32 +9,21 @@ function main() {
     navigator.geolocation.getCurrentPosition((position)=>{
       let lat = parseFloat(position.coords.latitude.toFixed(2));
       let lon = parseFloat(position.coords.longitude.toFixed(2));
+
       getWeatherData(lat, lon)
       .then((data)=> {
         locationInput.value = data.city.name + ', ' + data.city.country;
-        return data.list
+        // console.log(data)
+        setInterval(()=>{
+          updateDate(data);
+        }, 100)
+        return data.list;
       })
-      .then((data)=>{
-        let date = new Date(data[0].dt_txt);
-        timeEl.textContent = date.toLocaleTimeString([],{hour: '2-digit', minute: '2-digit', hour12: false});
-        let interval =  setInterval(()=>{
-          updateDate(data[0]);
-        }, 300)
-        
-        if (date.getHours() > 6 &&
-            date.getHours() < 18) {
-            sunIcon.style.display = '';
-            body.style.background =  getComputedStyle(body).getPropertyValue('--day-bg');
-            moonIcon.style.display = 'none';
-            
-        } else {
-          moonIcon.style.display = '';
-          body.style.background =  getComputedStyle(body).getPropertyValue('--night-bg');
-          sunIcon.style.display = 'none';
-        }
-        const MONTHS = ['Jan','Feb','March','April','May','June','July','Aug','Sep','Oct','Nov','Dec'];
-        const DAYS = ['Sunday','Monday','Tuesday','Wednesday','Thurday','Friday','Saturday'] ;
-        dateEl.textContent = `${DAYS[date.getDay()]} ${date.getDate()}, ${MONTHS[date.getMonth()]}`;
+      .then(data=>{
+        updatePrediction(data);
+        setInterval(()=>{
+          updatePrediction(data);
+        }, 3600000)
         return data;
       })
       .then((data)=>{
@@ -65,12 +54,19 @@ function main() {
 
 main();
 
+const MONTHS = ['Jan','Feb','March','April','May','June','July','Aug','Sep','Oct','Nov','Dec'];
+const DAYS = ['Sunday','Monday','Tuesday','Wednesday','Thurday','Friday','Saturday'] ;
 
 function updateDate(data) {
-  const DATE = new Date(data.dt_txt);
+  const DATE = new Date();
   timeEl.textContent = DATE.toLocaleTimeString([],{hour: '2-digit', minute: '2-digit', hour12: false});
-  if (DATE.getHours() > 6 &&
-      DATE.getHours() < 18) {
+  let sunrise = new Date(data.city.sunrise).getHours();
+  let sunset = new Date(data.city.sunset).getHours();
+
+  if(DATE.getMinutes() % 60 > 1) return;
+  
+  if (DATE.getHours() > sunrise &&
+      DATE.getHours() < sunset + 12) {
     sunIcon.style.display = '';
     body.style.background =  getComputedStyle(body).getPropertyValue('--day-bg');
     moonIcon.style.display = 'none';
@@ -80,8 +76,24 @@ function updateDate(data) {
     body.style.background =  getComputedStyle(body).getPropertyValue('--night-bg');
     sunIcon.style.display = 'none';
   }
-  const MONTHS = ['Jan','Feb','March','April','May','June','July','Aug','Sep','Oct','Nov','Dec'];
-  const DAYS = ['Sunday','Monday','Tuesday','Wednesday','Thurday','Friday','Saturday'] ;
+  
+  if(DATE.getHours() & 12 > 1) return;
+
   dateEl.textContent = `${DAYS[DATE.getDay()]} ${DATE.getDate()}, ${MONTHS[DATE.getMonth()]}`;
-  return data;
+  
+}
+
+function updatePrediction(data) {
+  let ListI = 7;
+  
+  for (let i = 1; i < predictionDays.length; i++) {
+    let pred = data[ListI];
+    let day = new Date(pred.dt_txt).getDay();
+    predictionDays[i].textContent = DAYS[day];
+    predictionTemps[i-1].textContent = parseInt(pred.main.temp - 273);
+    predictionWindS[i-1].textContent = pred.wind.speed.toFixed(1);
+    predicitonHum[i-1].textContent = pred.main.humidity;
+    ListI += 8;
+  }
+
 }
