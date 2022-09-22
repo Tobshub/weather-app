@@ -62,22 +62,17 @@ function updateDate(data) {
   timeEl.textContent = DATE.toLocaleTimeString([],{hour: '2-digit', minute: '2-digit', hour12: false});
   let sunrise = new Date(data.city.sunrise).getHours();
   let sunset = new Date(data.city.sunset).getHours();
-
-  if(DATE.getMinutes() % 60 > 1) return;
   
   if (DATE.getHours() > sunrise &&
       DATE.getHours() < sunset + 12) {
     sunIcon.style.display = '';
     body.style.background =  getComputedStyle(body).getPropertyValue('--day-bg');
     moonIcon.style.display = 'none';
-      
   } else {
     moonIcon.style.display = '';
     body.style.background =  getComputedStyle(body).getPropertyValue('--night-bg');
     sunIcon.style.display = 'none';
   }
-  
-  if(DATE.getHours() & 12 > 1) return;
 
   dateEl.textContent = `${DAYS[DATE.getDay()]} ${DATE.getDate()}, ${MONTHS[DATE.getMonth()]}`;
   

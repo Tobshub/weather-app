@@ -38,8 +38,8 @@ body {
   z-index: 100;
   width: 100%;
   height: 100%;
-  background-color: #fff;
-  background-image: url('https://media4.giphy.com/media/kUTME7ABmhYg5J3psM/giphy.gif?cid=ecf05e47yziz6iiiu8rqy9aj0c5a5htdo9soclyncg1o1l34&rid=giphy.gif&ct=g');
+  background-color: #000;
+  background-image: url('./images/loader.webp');
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
