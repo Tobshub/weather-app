@@ -67,21 +67,21 @@ main();
 
 
 function updateDate(data) {
-  const DATE = new Date();
+  const DATE = new Date(data.dt_txt);
   timeEl.textContent = DATE.toLocaleTimeString([],{hour: '2-digit', minute: '2-digit', hour12: false});
-  if (DATE.getHours() > new Date(data.sys.sunrise).getHours() &&
-            DATE.getHours() < (new Date(data.sys.sunset).getHours()) + 12) {
-            sunIcon.style.display = '';
-            body.style.background =  getComputedStyle(body).getPropertyValue('--day-bg');
-            moonIcon.style.display = 'none';
-            
-        } else {
-          moonIcon.style.display = '';
-          body.style.background =  getComputedStyle(body).getPropertyValue('--night-bg');
-          sunIcon.style.display = 'none';
-        }
-        const MONTHS = ['Jan','Feb','March','April','May','June','July','Aug','Sep','Oct','Nov','Dec'];
-        const DAYS = ['Sunday','Monday','Tuesday','Wednesday','Thurday','Friday','Saturday'] ;
-        dateEl.textContent = `${DAYS[DATE.getDay()]} ${DATE.getDate()}, ${MONTHS[DATE.getMonth()]}`;
-        return data;
+  if (DATE.getHours() > 6 &&
+      DATE.getHours() < 18) {
+    sunIcon.style.display = '';
+    body.style.background =  getComputedStyle(body).getPropertyValue('--day-bg');
+    moonIcon.style.display = 'none';
+      
+  } else {
+    moonIcon.style.display = '';
+    body.style.background =  getComputedStyle(body).getPropertyValue('--night-bg');
+    sunIcon.style.display = 'none';
+  }
+  const MONTHS = ['Jan','Feb','March','April','May','June','July','Aug','Sep','Oct','Nov','Dec'];
+  const DAYS = ['Sunday','Monday','Tuesday','Wednesday','Thurday','Friday','Saturday'] ;
+  dateEl.textContent = `${DAYS[DATE.getDay()]} ${DATE.getDate()}, ${MONTHS[DATE.getMonth()]}`;
+  return data;
 }
