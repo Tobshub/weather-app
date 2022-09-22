@@ -1,0 +1,163 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --night-bg: linear-gradient(45deg, 
+  rgba(41,17,75,1) 0%, 
+  rgba(130,46,150,1) 58%, 
+  rgba(47,126,208,1) 100%);
+
+  --day-bg: radial-gradient(circle, 
+  rgba(255,255,255,1) 0%, 
+  rgba(233,255,7,1) 50%, 
+  rgba(254,254,254,1) 100%);
+
+  --main-info-bounds: hsl(0 0% 0%);
+}
+
+body {
+  height: 100vh;
+  width: 100vw;
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  align-items: center;
+  color: #000;
+  position: relative;
+  font-size: 20px;
+  background: var(--day-bg);
+}
+
+.loader {
+  position: absolute;
+  top: 0;
+  z-index: 100;
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  background-image: url('https://media4.giphy.com/media/kUTME7ABmhYg5J3psM/giphy.gif?cid=ecf05e47yziz6iiiu8rqy9aj0c5a5htdo9soclyncg1o1l34&rid=giphy.gif&ct=g');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 48
+}
+
+@media (max-width: 600px) {
+  .main-details {
+    width: 100%;
+    height: 60vh;
+    background-color: #0000005f;
+    border-radius: 5px;
+    box-shadow: 0 0 10px 2px var(--main-info-bounds) inset,
+                0 0 5px 1px var(--main-info-bounds);
+    color:  #fff;
+  }
+
+  .main-details > div {
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
+
+  .date-time {
+    display: flex;
+    flex-direction: column;
+    margin: 2em 0;
+  }
+
+  .time > span:first-of-type {
+    margin-right: .4em;
+  }
+
+  .main-info {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin: 2em 0;
+  }
+
+  .em-info {
+    font-size: 60px;
+    position: relative;
+  }
+  .em-info::after {
+    content: 'C';
+    position: absolute;
+    font-size: 30px;
+  }
+
+  .sec-info {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  .sec-info .material-symbols-outlined {
+    vertical-align:  sub;
+  }
+
+  .curr-details {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 2em 0;
+  }
+
+  .curr-details > div { 
+    width: fit-content;
+    margin-inline: 1em;
+  }
+
+  #conditions {
+    text-transform: capitalize;
+  }
+
+  .curr-details input {
+    width: 100px;
+    font-size: 18px;
+    padding: .2em .5em;
+  }
+
+  .predictions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 40vh;
+    padding: 0 1em;
+    color: #fff;
+  }
+
+  .prediction {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: max-content;
+    margin-bottom: .2em;
+  }
+
+  .prediction-day, .prediction-info {
+    padding: .2em .5em;
+    background-color: #0000005f;
+  }
+
+  .prediction-info {
+    display: flex;
+    gap: 1em;
+  }
+}

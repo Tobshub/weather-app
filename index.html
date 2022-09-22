@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  <title>We-there</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="loader"> </div>
+
+  <main class="main-details">
+
+      <div class="date-time">
+        <div class="time">
+          <span id="time-span">00:23</span>
+          <span class="material-symbols-outlined" id="time-icon-sun">
+            sunny
+          </span>
+          <span class="material-symbols-outlined" id="time-icon-moon">
+            clear_night
+          </span>
+        </div>
+
+        <span id="date-span">Monday 10 Sep</span>
+      </div> 
+
+      <div class="main-info">
+        <div class="em-info">
+          <span id="temp">30</span>
+        </div>
+        <div class="sec-info">
+          <div>
+            <span class="material-symbols-outlined">
+              humidity_mid
+            </span>
+            <span id="humidity">00</span>
+          </div>
+          <div>
+            <span class="material-symbols-outlined">
+              air
+            </span>
+            <span id="wind-speed">00</span>
+          </div>
+        </div>        
+      </div>
+
+      <div class="curr-details">
+        <div class="curr-info">
+          <span id="conditions">Clear Day</span>
+        </div>
+        
+        <div class="curr-location">
+          <input 
+            id="location"
+            placeholder="City"
+            value="Lagos"
+            type="text"
+          />
+        </div>
+      </div>
+
+  </main>
+
+  <section class="predictions">
+    <div class="prediction">
+      <span class="prediction-day">Day</span>
+      <div class="prediction-info">
+        <span class="material-symbols-outlined">
+          thermostat
+        </span>
+        <span class="material-symbols-outlined">
+          air
+        </span>
+        <span class="material-symbols-outlined">
+          humidity_mid
+        </span>
+      </div>
+    </div>
+
+    <div id="day-1" class="prediction">
+        <span class="prediction-day">Tuesday</span>
+        <div class="prediction-info">
+          <span class="prediction-temp">00</span>
+          <span class="prediction-wind-speed">00</span>
+          <span class="prediction-humidity">00</span>
+        </div>
+    </div>
+    <div id="day-2" class="prediction">
+        <span class="prediction-day">Wednesday</span>
+        <div class="prediction-info">
+          <span class="prediction-temp">00</span>
+          <span class="prediction-wind-speed">00</span>
+          <span class="prediction-humidity">00</span>
+        </div>
+    </div>
+    <div id="day-2" class="prediction">
+        <span class="prediction-day">Thursday</span>
+        <div class="prediction-info">
+          <span class="prediction-temp">00</span>
+          <span class="prediction-wind-speed">00</span>
+          <span class="prediction-humidity">00</span>
+        </div>
+    </div>
+    <div id="day-2" class="prediction">
+        <span class="prediction-day">Friday</span>
+        <div class="prediction-info">
+          <span class="prediction-temp">00</span>
+          <span class="prediction-wind-speed">00</span>
+          <span class="prediction-humidity">00</span>
+        </div>
+    </div>
+
+  </section>
+
+
+<script src="./script.js" type="module"></script>
+
+</body>
+</html>
