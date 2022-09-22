@@ -67,7 +67,7 @@ body {
   }
 
   .main-details > div {
-    display: block;
+    /* display: block; */
     width: 100%;
     text-align: center;
   }
@@ -76,6 +76,7 @@ body {
     display: flex;
     flex-direction: column;
     margin: 2em 0;
+    gap: .25em 0;
   }
 
   .time > span:first-of-type {
@@ -90,8 +91,10 @@ body {
   }
 
   .em-info {
-    font-size: 60px;
+    font-size: 4em;
+    font-weight: bold;
     position: relative;
+    margin: .3em 0;
   }
   .em-info::after {
     content: 'C';
@@ -103,6 +106,7 @@ body {
     display: flex;
     justify-content: space-around;
     align-items: center;
+    margin: .25em 0;
   }
 
   .sec-info .material-symbols-outlined {
@@ -114,7 +118,8 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: left;
+    gap: .75em;
     margin: 2em 0;
   }
 
@@ -156,6 +161,7 @@ body {
   .prediction-day, .prediction-info {
     padding: .2em .5em;
     background-color: #0000005f;
+    width: 130px;
   }
 
   .prediction-info {
