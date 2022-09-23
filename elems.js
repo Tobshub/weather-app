@@ -7,6 +7,7 @@ const humEl = document.getElementById('humidity');
 const windSEl = document.getElementById('wind-speed');
 const conditionEl = document.getElementById('conditions');
 const locationInput = document.getElementById('location');
+const locationSearchBtn = document.getElementById('search-location');
 const body = document.getElementsByTagName('body')[0];
 const loader = document.querySelector('.loader');
 const predictionDays = document.querySelectorAll('.prediction-day');
@@ -15,4 +16,4 @@ const predictionWindS = document.querySelectorAll('.prediction-wind-speed');
 const predicitonHum = document.querySelectorAll('.prediction-humidity');
 
 
-export {body,timeEl,sunIcon,moonIcon,dateEl,tempEl,humEl,windSEl,conditionEl,locationInput,loader,predicitonHum,predictionDays,predictionTemps,predictionWindS};
+export {body,timeEl,sunIcon,moonIcon,dateEl,tempEl,humEl,windSEl,conditionEl,locationInput,locationSearchBtn,loader,predicitonHum,predictionDays,predictionTemps,predictionWindS};

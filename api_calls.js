@@ -1,3 +1,4 @@
+
 const API_KEY = '50ea7d652e899286b51fc70b0bc100a7';
 
 export const getWeatherData = async (lat,lon) => {
@@ -11,7 +12,37 @@ export const getWeatherData = async (lat,lon) => {
   }
 }
 
+export const getLocationData = async (city, country_code) => {
+  try {
+    const location = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${city},${country_code}&appid=${API_KEY}`);
+    const locationData = await location.json();
+    return locationData;
+  }
+  catch(e) {
+    console.log(e);
+  }
+}
 
+export async function getCountries() {
+  let country_data = await fetch('countries.json');
+  let countries = await country_data.json();
+  return countries;
+}
 
-// let lookup = require('country-data').lookup;
-// console.log(lookup.countries({name: 'Nigeria'}))
+export function searchCountry(country, countryArr) {
+  for (let i = 0; i < countryArr.length; i++) {
+    if (countryArr[i].name == country) {
+      return countryArr[i];
+    }
+  }
+  return 'Country not found'
+}
+
+export function searchCountryByAlpha(alpha, countryArr) {
+  for (let i = 0; i <countryArr.length; i++) {
+    if (countryArr[i].alpha2 == alpha || countryArr[i].alpha3 == alpha) {
+      return countryArr[i].name;
+    }
+  }
+  return '';
+}
