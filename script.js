@@ -117,7 +117,7 @@ locationSearchBtn.onclick = () => {
     return country_code;
   })
   .then(code=>{
-    let locationData = getLocationData(query[0], query[1]);
+    let locationData = getLocationData(query[0], code);
     return locationData;
   })
   .then(data=>{
