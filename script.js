@@ -73,9 +73,6 @@ function main(lat = null,lon = null) {
     })
     .then(data=>{
       updatePrediction(data);
-      setInterval(()=>{
-        updatePrediction(data);
-      }, 3600000)
       return data;
     })
     .then((data)=>{
