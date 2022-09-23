@@ -62,6 +62,10 @@ function main(lat = null,lon = null) {
       .then(data=>{
         locationInput.value = obj.city.name + ', ' + searchCountryByAlpha(obj.city.country, data);
       })
+      const interval_id = window.setInterval(function(){}, Number.MAX_SAFE_INTEGER);
+      for (let i = 1; i < interval_id; i++) {
+        window.clearInterval(i);
+      }
       setInterval(()=>{
         updateDate(data);
       }, 100)
@@ -131,6 +135,8 @@ const DAYS = ['Sunday','Monday','Tuesday','Wednesday','Thurday','Friday','Saturd
 
 function updateDate(data) {
   const DATE = new Date();
+  DATE.setTime(DATE.getTime() + (data.city.timezone * 1000) + (DATE.getTimezoneOffset() * 60 * 1000)); 
+  
   timeEl.textContent = DATE.toLocaleTimeString([],{hour: '2-digit', minute: '2-digit', hour12: false});
   let sunrise = new Date(data.city.sunrise).getHours();
   let sunset = new Date(data.city.sunset).getHours();
@@ -159,9 +165,9 @@ function updatePrediction(data) {
     let pred = data[ListI];
     let day = new Date(pred.dt_txt).getDay();
     predictionDays[i].textContent = DAYS[day];
-    predictionTemps[i-1].textContent = parseInt(pred.main.temp - 273);
+    predictionTemps[i-1].textContent = (parseInt(pred.main.temp - 273) < 10)? '0' + parseInt(pred.main.temp - 273) : parseInt(pred.main.temp - 273);
     predictionWindS[i-1].textContent = pred.wind.speed.toFixed(1);
-    predicitonHum[i-1].textContent = pred.main.humidity;
+    predicitonHum[i-1].textContent = pred.main.humidity.toFixed(0);
     ListI += 8;
   }
 
