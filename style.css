@@ -57,7 +57,7 @@ body {
   background-repeat: no-repeat;
   background-size: contain;
   transition: 300ms ease;
-  display: none;
+  /* display: none; */
 }
 
 
