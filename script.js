@@ -142,12 +142,12 @@ function updateDate(data) {
       DATE.getHours() < sunset + 12) {
     sunIcon.style.display = '';
     body.style.background =  getComputedStyle(body).getPropertyValue('--day-bg');
-    body.style.setProperty('--main-info-bounds', 'hsl(0 0% 0%)');
+    body.style.setProperty('--main-info-bounds', 'hsl(0 0% 100%)');
     moonIcon.style.display = 'none';
   } else {
     moonIcon.style.display = '';
     body.style.background =  getComputedStyle(body).getPropertyValue('--night-bg');
-    body.style.setProperty('--main-info-bounds', 'hsl(0 0% 100%)');
+    body.style.setProperty('--main-info-bounds', 'hsl(0 0% 0%)');
     sunIcon.style.display = 'none';
   }
 

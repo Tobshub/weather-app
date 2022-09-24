@@ -12,8 +12,9 @@
 
   --day-bg: radial-gradient(circle, 
   rgba(255,255,255,1) 0%, 
-  rgba(233,255,7,1) 50%, 
-  rgba(254,254,254,1) 100%);
+  rgba(233,255,7,1) 5%, 
+  rgba(254,254,254,1) 40%,
+   rgb(9, 106, 185) 100%);
 
   --main-info-bounds: hsl(0 0% 0%);
 }
@@ -37,7 +38,7 @@ body {
   color: #000;
   position: relative;
   font-size: 20px;
-  background: var(--day-bg);
+  background: var(--day-bg) no-repeat center center;
   font-family: Arial, Helvetica, sans-serif;
   font-weight: 600;
   box-shadow: 0 0 1em .1em var(--main-info-bounds) inset,
@@ -194,4 +195,25 @@ body {
     display: flex;
     justify-content: space-around;
   }
+
+  .prediction-wind-speed {
+    position: relative;
+  }
+  .prediction-wind-speed::after {
+    content: 'km/h';
+    vertical-align: super;
+    font-size: x-small;
+    position: absolute;
+  }
+
+  .prediction-temp {
+    position: relative;
+  }
+  .prediction-temp::after {
+    content: 'C';
+    vertical-align: super;
+    font-size: x-small;
+    position: absolute;
+  }
+
 }
