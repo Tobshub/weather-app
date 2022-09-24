@@ -158,13 +158,13 @@ function updateDate(data) {
 function updatePrediction(data) {
   let ListI = 7;
   
-  for (let i = 1; i < predictionDays.length; i++) {
+  for (let i = 0; i < predictionDays.length; i++) {
     let pred = data[ListI];
     let day = new Date(pred.dt_txt).getDay();
     predictionDays[i].textContent = DAYS[day];
-    predictionTemps[i-1].textContent = (parseInt(pred.main.temp - 273) < 10)? '0' + parseInt(pred.main.temp - 273) : parseInt(pred.main.temp - 273);
-    predictionWindS[i-1].textContent = pred.wind.speed.toFixed(1);
-    predicitonHum[i-1].textContent = pred.main.humidity.toFixed(0);
+    predictionTemps[i].textContent = (parseInt(pred.main.temp - 273) < 10)? '0' + parseInt(pred.main.temp - 273) : parseInt(pred.main.temp - 273);
+    predictionWindS[i].textContent = pred.wind.speed.toFixed(1);
+    predicitonHum[i].textContent = pred.main.humidity.toFixed(0);
     ListI += 8;
   }
 
